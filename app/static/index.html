@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taskflow - Gestionnaire de tâches</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="preconnect" href="https://fonts.bunny.net" />
+    <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="logo">Taskflow</div>
+      <div class="summary" id="summary"></div>
+    </header>
+    <main class="layout">
+      <aside class="sidebar">
+        <div class="section-header">
+          <h2>Projets</h2>
+          <button class="icon-button" id="addProjectBtn" title="Ajouter un projet">+</button>
+        </div>
+        <ul class="project-list" id="projectList"></ul>
+      </aside>
+      <section class="content">
+        <div class="content-header">
+          <div>
+            <h1 id="activeProject">Inbox</h1>
+            <p class="muted" id="projectDescription">Gérez vos tâches quotidiennes.</p>
+          </div>
+          <div class="filters">
+            <select id="completedFilter">
+              <option value="all">Toutes</option>
+              <option value="active">Actives</option>
+              <option value="done">Terminées</option>
+            </select>
+            <input type="date" id="dueBefore" />
+            <input type="text" id="searchInput" placeholder="Rechercher..." />
+          </div>
+        </div>
+        <ul class="task-list" id="taskList"></ul>
+        <form class="task-form" id="taskForm">
+          <h3>Nouvelle tâche</h3>
+          <div class="form-grid">
+            <label>
+              Titre
+              <input type="text" id="taskTitle" required maxlength="120" />
+            </label>
+            <label>
+              Projet
+              <select id="taskProject"></select>
+            </label>
+            <label>
+              Échéance
+              <input type="date" id="taskDue" />
+            </label>
+            <label>
+              Priorité
+              <select id="taskPriority">
+                <option value="4">Urgent</option>
+                <option value="3">Élevée</option>
+                <option value="2" selected>Normale</option>
+                <option value="1">Basse</option>
+              </select>
+            </label>
+          </div>
+          <label>
+            Description
+            <textarea id="taskDescription" rows="3"></textarea>
+          </label>
+          <button type="submit" class="primary">Ajouter la tâche</button>
+        </form>
+      </section>
+    </main>
+
+    <dialog id="projectDialog">
+      <form method="dialog" class="dialog">
+        <h3>Nouveau projet</h3>
+        <label>
+          Nom
+          <input type="text" id="projectName" required maxlength="80" />
+        </label>
+        <label>
+          Couleur
+          <input type="color" id="projectColor" value="#7c3aed" />
+        </label>
+        <menu>
+          <button value="cancel">Annuler</button>
+          <button id="projectDialogSubmit" value="confirm">Créer</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <template id="taskTemplate">
+      <li class="task-item">
+        <div class="task-main">
+          <input type="checkbox" class="task-checkbox" />
+          <div class="task-info">
+            <div class="task-title"></div>
+            <div class="task-meta"></div>
+          </div>
+        </div>
+        <button class="icon-button delete-button" title="Supprimer">×</button>
+      </li>
+    </template>
+
+    <script src="/static/app.js" type="module"></script>
+  </body>
+</html>
